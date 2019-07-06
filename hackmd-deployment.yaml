@@ -1,0 +1,29 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: hackmd
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: hackmd
+  template:
+    metadata:
+      labels:
+        app: hackmd
+    spec:
+      containers:
+        - name: hackmd
+          image: hackmdio/hackmd:1.3.1
+          imagePullPolicy: "IfNotPresent"
+          env:
+            - name: CMD_DB_URL
+              valueFrom:
+                secretKeyRef:
+                  name: hackmd-config
+                  key: db_url
+            - name: CMD_SESSION_SECRET
+              valueFrom:
+                secretKeyRef:
+                  name: hackmd-config
+                  key: session_secret

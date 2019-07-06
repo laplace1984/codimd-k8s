@@ -1,0 +1,8 @@
+apiVersion: v1
+kind: Secret
+metadata:
+  name: hackmd-config
+type: Opaque
+stringData:
+  db_url: postgres://hackmd:hackmd@postgres:5432/hackmd
+  session_secret: <to3B<z9
